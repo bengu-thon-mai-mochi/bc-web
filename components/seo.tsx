@@ -45,8 +45,8 @@ const SEO: NextPage<Props> = ({ pageTitle, description, image }) => {
         images: [pageImage],
         site_name: appName,
       }}
-      noindex={false}
-      nofollow={false}
+      noindex={true}
+      nofollow={true}
     />
   );
 };

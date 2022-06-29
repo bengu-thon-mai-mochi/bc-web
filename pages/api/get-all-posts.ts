@@ -42,8 +42,6 @@ export default async function handler(
     order: "-sys.createdAt",
   });
 
-  client.close();
-
   const overviewDetailsOnly: Blogpost[] = entries.items.map((item: any) => ({
     title: item.fields.title,
     published: item.fields.published,
