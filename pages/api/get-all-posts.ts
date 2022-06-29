@@ -19,6 +19,7 @@ export type Blogpost = {
 
 type Data = {
   entries: Blogpost[];
+  total: number;
 };
 
 export default async function handler(
@@ -32,9 +33,16 @@ export default async function handler(
     accessToken: CONTENTFUL_CDA_KEY,
   });
 
+  const { skip } = req.query;
+
   const entries = await client.getEntries({
     content_type: "blogpost",
+    skip,
+    limit: 20,
+    order: "-sys.createdAt",
   });
+
+  client.close();
 
   const overviewDetailsOnly: Blogpost[] = entries.items.map((item: any) => ({
     title: item.fields.title,
@@ -46,5 +54,5 @@ export default async function handler(
     },
   }));
 
-  res.status(200).json({ entries: overviewDetailsOnly });
+  res.status(200).json({ entries: overviewDetailsOnly, total: entries.total });
 }
