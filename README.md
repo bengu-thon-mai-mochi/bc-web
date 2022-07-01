@@ -1,5 +1,7 @@
 ## Todo
 
+- Implement SSR for all pages
+
 - Landing page
 
   - Blog posts

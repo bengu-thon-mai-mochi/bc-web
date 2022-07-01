@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 
-import { Blogpost } from "./api/get-all-posts";
+import { BlogPostSummary } from "./api/get-all-posts";
 import Link from "next/link";
 import type { NextPage } from "next";
 import styled from "styled-components";
 
-const PageWrapper = styled.div`
+export const PageWrapper = styled.div`
   display: flex;
   justify-content: center;
   margin-bottom: 5rem;
 `;
 
-const CenterCol = styled.div`
+export const CenterCol = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -52,14 +52,14 @@ const BlogPageLinks = styled.div`
 const skip = 10;
 
 const Home: NextPage = () => {
-  const [posts, setPosts] = useState<Blogpost[]>([]);
+  const [posts, setPosts] = useState<BlogPostSummary[]>([]);
   const [pages, setPages] = useState<number>();
 
-  const fetchIt = async (pageNum: number) => {
+  const fetchBlogPosts = async (pageNum: number) => {
     const { entries, total } = await (
       await fetch(`/api/get-all-posts?skip=${pageNum * skip}`)
     ).json();
-    console.log(entries);
+
     setPosts(entries);
 
     const pages = Math.ceil(total / skip);
@@ -69,7 +69,7 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     // get pageNum from url query param
-    fetchIt(1);
+    fetchBlogPosts(1);
   }, []);
 
   return (
@@ -79,13 +79,32 @@ const Home: NextPage = () => {
 
         <PostsWrapper>
           {!!posts.length &&
-            posts.map((post) => (
-              <Post key={post.title}>
-                <h2>{post.title}</h2>
-                <span>{post.published}</span>
-                <p>{post.description}</p>
-              </Post>
-            ))}
+            posts.map((post) => {
+              const dt = new Date(post.published);
+
+              const date = `${dt.getDate()} ${dt.toLocaleString([], {
+                month: "short",
+              })} ${dt.getFullYear()}`;
+
+              const time = `${dt.toLocaleTimeString([], {
+                hour: "2-digit",
+                minute: "2-digit",
+              })}`;
+
+              const pubDate = `${date}, ${time}`;
+
+              return (
+                <Post key={post.title}>
+                  <h2>
+                    <Link href={`/blog/post/${post.id}`}>
+                      <a>{post.title}</a>
+                    </Link>
+                  </h2>
+                  <span>Published: {pubDate}</span>
+                  <p>{post.description}</p>
+                </Post>
+              );
+            })}
         </PostsWrapper>
 
         <BlogPageLinks>
