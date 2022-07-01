@@ -1,8 +1,9 @@
 import { CenterCol, PageWrapper } from "../..";
 import { useEffect, useState } from "react";
 
-import { BlogPost } from "../../api/get-single-post";
+import { BlogPost } from "../../../util/types";
 import type { NextPage } from "next";
+import SEO from "../../../components/seo";
 import { getDisplayDatetime } from "../../../util";
 import { useRouter } from "next/router";
 
@@ -30,13 +31,18 @@ const BlogPostPage: NextPage = () => {
   }
 
   return (
-    <PageWrapper>
-      <CenterCol>
-        <h1>{post.title}</h1>
-        <span>Published: {getDisplayDatetime(post.published)}</span>
-        <div dangerouslySetInnerHTML={{ __html: post.content }} />
-      </CenterCol>
-    </PageWrapper>
+    <>
+      <SEO pageTitle={post.title} description={post.description} />
+      <PageWrapper>
+        <CenterCol>
+          <h1>{post.title}</h1>
+
+          <span>Published: {getDisplayDatetime(post.published)}</span>
+
+          <div dangerouslySetInnerHTML={{ __html: post.content! }} />
+        </CenterCol>
+      </PageWrapper>
+    </>
   );
 };
 

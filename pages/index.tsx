@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { BlogPostSummary } from "./api/get-all-posts";
+import { BlogPost } from "../util/types";
 import Link from "next/link";
 import type { NextPage } from "next";
 import { getDisplayDatetime } from "../util";
@@ -53,7 +53,7 @@ const BlogPageLinks = styled.div`
 const skip = 10;
 
 const Home: NextPage = () => {
-  const [posts, setPosts] = useState<BlogPostSummary[]>([]);
+  const [posts, setPosts] = useState<BlogPost[]>([]);
   const [pages, setPages] = useState<number>();
 
   const fetchBlogPosts = async (pageNum: number) => {
