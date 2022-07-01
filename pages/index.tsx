@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { BlogPostSummary } from "./api/get-all-posts";
 import Link from "next/link";
 import type { NextPage } from "next";
+import { getDisplayDatetime } from "../util";
 import styled from "styled-components";
 
 export const PageWrapper = styled.div`
@@ -79,32 +80,17 @@ const Home: NextPage = () => {
 
         <PostsWrapper>
           {!!posts.length &&
-            posts.map((post) => {
-              const dt = new Date(post.published);
-
-              const date = `${dt.getDate()} ${dt.toLocaleString([], {
-                month: "short",
-              })} ${dt.getFullYear()}`;
-
-              const time = `${dt.toLocaleTimeString([], {
-                hour: "2-digit",
-                minute: "2-digit",
-              })}`;
-
-              const pubDate = `${date}, ${time}`;
-
-              return (
-                <Post key={post.title}>
-                  <h2>
-                    <Link href={`/blog/post/${post.id}`}>
-                      <a>{post.title}</a>
-                    </Link>
-                  </h2>
-                  <span>Published: {pubDate}</span>
-                  <p>{post.description}</p>
-                </Post>
-              );
-            })}
+            posts.map((post) => (
+              <Post key={post.title}>
+                <h2>
+                  <Link href={`/blog/post/${post.id}`}>
+                    <a>{post.title}</a>
+                  </Link>
+                </h2>
+                <span>Published: {getDisplayDatetime(post.published)}</span>
+                <p>{post.description}</p>
+              </Post>
+            ))}
         </PostsWrapper>
 
         <BlogPageLinks>

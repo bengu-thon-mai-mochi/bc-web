@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 import { BlogPost } from "../../api/get-single-post";
 import type { NextPage } from "next";
+import { getDisplayDatetime } from "../../../util";
 import { useRouter } from "next/router";
 
 const BlogPostPage: NextPage = () => {
@@ -28,24 +29,11 @@ const BlogPostPage: NextPage = () => {
     return null;
   }
 
-  const dt = new Date(post.published);
-
-  const date = `${dt.getDate()} ${dt.toLocaleString([], {
-    month: "short",
-  })} ${dt.getFullYear()}`;
-
-  const time = `${dt.toLocaleTimeString([], {
-    hour: "2-digit",
-    minute: "2-digit",
-  })}`;
-
-  const pubDate = `${date}, ${time}`;
-
   return (
     <PageWrapper>
       <CenterCol>
         <h1>{post.title}</h1>
-        <span>Published: {pubDate}</span>
+        <span>Published: {getDisplayDatetime(post.published)}</span>
         <div dangerouslySetInnerHTML={{ __html: post.content }} />
       </CenterCol>
     </PageWrapper>
