@@ -1,30 +1,35 @@
 import { CenterCol, PageWrapper } from "../.";
-import { useEffect, useState } from "react";
+// import { ContextType, useEffect, useState } from "react";
+import type { GetServerSideProps, NextPage } from "next";
 
 import { BlogPost } from "../../../util/types";
-import type { NextPage } from "next";
 import SEO from "../../../components/seo";
 import { getDisplayDatetime } from "../../../util";
-import { useRouter } from "next/router";
 
-const BlogPostPage: NextPage = () => {
-  const router = useRouter();
+// import { useRouter } from "next/router";
 
-  const [post, setPost] = useState<BlogPost>();
+interface Props {
+  post: BlogPost;
+}
 
-  const fetchBlogPosts = async (id: string) => {
-    const { entry } = await (
-      await fetch(`/api/get-single-post?id=${id}`)
-    ).json();
+const BlogPostPage: NextPage<Props> = ({ post }: Props) => {
+  // const router = useRouter();
 
-    setPost(entry);
-  };
+  // const [post, setPost] = useState<BlogPost>();
 
-  useEffect(() => {
-    const { id } = router.query;
+  // const fetchBlogPosts = async (id: string) => {
+  //   const { entry } = await (
+  //     await fetch(`/api/get-single-post?id=${id}`)
+  //   ).json();
 
-    fetchBlogPosts(id as string);
-  }, [router.query]);
+  //   setPost(entry);
+  // };
+
+  // useEffect(() => {
+  //   const { id } = router.query;
+
+  //   fetchBlogPosts(id as string);
+  // }, [router.query]);
 
   if (!post) {
     return null;
@@ -47,3 +52,16 @@ const BlogPostPage: NextPage = () => {
 };
 
 export default BlogPostPage;
+
+export const getServerSideProps: GetServerSideProps = async ({
+  req,
+  query,
+}) => {
+  const host = req.headers.host;
+  const protocol = req.headers.referer?.split("://")[0];
+  const { entry } = await (
+    await fetch(`${protocol}://${host}/api/get-single-post?id=${query.id}`)
+  ).json();
+
+  return { props: { post: entry } };
+};
