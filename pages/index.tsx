@@ -26,10 +26,12 @@ const Home: NextPage = () => {
   return (
     <PageWrapper>
       <CenterCol>
-        <h1>Landing page</h1>
+        <h1>Biodiversity Connections</h1>
 
         <Section>
-          <h2>Events</h2>
+          <h2>We do</h2>
+
+          <p>Conservation and science meetups since 201X.</p>
         </Section>
 
         <Section>

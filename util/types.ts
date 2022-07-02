@@ -9,3 +9,16 @@ export type BlogPost = {
     title: string;
   };
 };
+
+export type Page = {
+  id: string;
+  slug: string;
+  title: string;
+  updated: string;
+  description?: string;
+  content?: string;
+  featuredImage: {
+    url: string;
+    title: string;
+  };
+};

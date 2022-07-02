@@ -11,7 +11,7 @@ const Nav = styled.nav`
   gap: 2rem;
   justify-content: flex-end;
   padding: 0.5rem 1rem;
-  background-color: gold;
+  background-color: antiquewhite;
 `;
 
 interface Props {
@@ -28,6 +28,18 @@ const Layout = ({ children }: Props) => {
 
         <Link href="/blog/1">
           <a>Blog</a>
+        </Link>
+
+        <Link href="/biodiversity-singapore">
+          <a>Biodiversity Singapore</a>
+        </Link>
+
+        <Link href="/open-science">
+          <a>Open Science</a>
+        </Link>
+
+        <Link href="/about-us">
+          <a>About us</a>
         </Link>
       </Nav>
       {children}

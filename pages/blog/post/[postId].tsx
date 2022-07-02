@@ -1,4 +1,4 @@
-import { CenterCol, PageWrapper } from "../../../styles/components";
+import { CenterCol, ImgWrapper, PageWrapper } from "../../../styles/components";
 import type { GetServerSideProps, NextPage } from "next";
 import { getDisplayDatetime, getDomainInfo } from "../../../util";
 
@@ -9,14 +9,6 @@ import styled from "styled-components";
 
 export const PubDate = styled.span`
   font-style: italic;
-`;
-
-const ImgWrapper = styled.div`
-  display: block;
-  width: 100%;
-  height: 100%;
-  max-height: 800px;
-  background-color: red;
 `;
 
 interface Props {

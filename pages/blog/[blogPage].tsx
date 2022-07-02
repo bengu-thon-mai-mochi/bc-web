@@ -44,7 +44,9 @@ const ImgWrapper = styled.div`
   width: 175px;
   height: 175px;
   border-radius: 5px;
-  background-color: gainsboro;
+  border: 1px solid gainsboro;
+  background-color: aliceblue;
+  color: silver;
   display: flex;
   justify-content: center;
   align-items: center;
