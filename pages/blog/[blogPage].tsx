@@ -84,11 +84,15 @@ const Blog: NextPage<Props> = ({ posts, total }: Props) => {
           {pages &&
             Array(pages)
               .fill(undefined)
-              .map((_, idx) => (
-                <Link href={`/blog/${idx}`} key={idx}>
-                  <a>{idx + 1}</a>
-                </Link>
-              ))}
+              .map((_, idx) => {
+                const page = idx + 1;
+
+                return (
+                  <Link href={`/blog/${page}`} key={idx}>
+                    <a>{page}</a>
+                  </Link>
+                );
+              })}
         </BlogPageLinks>
       </CenterCol>
     </PageWrapper>
@@ -102,9 +106,12 @@ export const getServerSideProps: GetServerSideProps = async ({
   query,
 }) => {
   const [host, protocol] = getDomainInfo(req.headers.host);
+  const blogPage = query.blogPage ? parseInt(query.blogPage as string, 10) : 1;
 
   const { entries, total } = await (
-    await fetch(`${protocol}://${host}/api/get-all-posts?skip=${1 * skip}`)
+    await fetch(
+      `${protocol}://${host}/api/get-all-posts?skip=${blogPage * skip}`
+    )
   ).json();
 
   return { props: { posts: entries, total } };
