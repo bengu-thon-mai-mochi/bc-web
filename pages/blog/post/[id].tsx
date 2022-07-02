@@ -1,9 +1,9 @@
 import { CenterCol, PageWrapper } from "../.";
 import type { GetServerSideProps, NextPage } from "next";
+import { getDisplayDatetime, getDomainInfo } from "../../../util";
 
 import { BlogPost } from "../../../util/types";
 import SEO from "../../../components/seo";
-import { getDisplayDatetime } from "../../../util";
 
 interface Props {
   post: BlogPost;
@@ -36,8 +36,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   req,
   query,
 }) => {
-  const host = req.headers.host;
-  const protocol = host?.includes("localhost:") ? "http" : "https";
+  const [host, protocol] = getDomainInfo(req.headers.host);
 
   const { entry } = await (
     await fetch(`${protocol}://${host}/api/get-single-post?id=${query.id}`)

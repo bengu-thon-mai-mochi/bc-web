@@ -1,9 +1,9 @@
+import type { GetServerSideProps, NextPage } from "next";
+import { getDisplayDatetime, getDomainInfo } from "../../util";
 import { useEffect, useState } from "react";
 
 import { BlogPost } from "../../util/types";
 import Link from "next/link";
-import type { NextPage } from "next";
-import { getDisplayDatetime } from "../../util";
 import styled from "styled-components";
 
 export const PageWrapper = styled.div`
@@ -52,26 +52,13 @@ const BlogPageLinks = styled.div`
 
 const skip = 10;
 
-const Blog: NextPage = () => {
-  const [posts, setPosts] = useState<BlogPost[]>([]);
-  const [pages, setPages] = useState<number>();
+interface Props {
+  posts: BlogPost[];
+  total: number;
+}
 
-  const fetchBlogPosts = async (pageNum: number) => {
-    const { entries, total } = await (
-      await fetch(`/api/get-all-posts?skip=${pageNum * skip}`)
-    ).json();
-
-    setPosts(entries);
-
-    const pages = Math.ceil(total / skip);
-
-    setPages(pages);
-  };
-
-  useEffect(() => {
-    // get pageNum from url query param
-    fetchBlogPosts(1);
-  }, []);
+const Blog: NextPage<Props> = ({ posts, total }: Props) => {
+  const pages = Math.ceil(total / skip);
 
   return (
     <PageWrapper>
@@ -109,3 +96,16 @@ const Blog: NextPage = () => {
 };
 
 export default Blog;
+
+export const getServerSideProps: GetServerSideProps = async ({
+  req,
+  query,
+}) => {
+  const [host, protocol] = getDomainInfo(req.headers.host);
+
+  const { entries, total } = await (
+    await fetch(`${protocol}://${host}/api/get-all-posts?skip=${1 * skip}`)
+  ).json();
+
+  return { props: { posts: entries, total } };
+};

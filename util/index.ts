@@ -1,3 +1,8 @@
+export const getDomainInfo = (host?: string) => {
+  const protocol = host?.includes("localhost:") ? "http" : "https";
+  return [host, protocol];
+};
+
 export const getDisplayDatetime = (datetimeString: string) => {
   const dt = new Date(datetimeString);
 
