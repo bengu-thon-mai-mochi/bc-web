@@ -46,7 +46,7 @@ const BlogPostPage: NextPage<Props> = ({ post }: Props) => {
                 width="100%"
                 height="100%"
                 objectFit="cover"
-                sizes="10vw"
+                sizes="70vw"
               />
             </ImgWrapper>
           )}
