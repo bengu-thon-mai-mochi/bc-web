@@ -7,6 +7,10 @@ const nextConfig = {
 
   reactStrictMode: true,
 
+  images: {
+    domains: ["images.ctfassets.net"],
+  },
+
   async redirects() {
     return [
       {

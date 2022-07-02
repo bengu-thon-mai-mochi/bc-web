@@ -3,7 +3,9 @@ import { getDisplayDatetime, getDomainInfo } from "../../util";
 import { useEffect, useState } from "react";
 
 import { BlogPost } from "../../util/types";
+import Image from "next/image";
 import Link from "next/link";
+import { breakpoints } from "../../styles/constants";
 import styled from "styled-components";
 
 export const PageWrapper = styled.div`
@@ -33,6 +35,34 @@ const PostsWrapper = styled.div`
 `;
 
 const Post = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+
+  @media only screen and (min-width: ${breakpoints.sm}px) {
+    flex-direction: row;
+  }
+`;
+
+const ImgWrapper = styled.div`
+  position: relative;
+  min-width: 200px;
+  height: 200px;
+  border-radius: 5px;
+  background-color: gainsboro;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    border-radius: 5px;
+  }
+`;
+
+const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
@@ -69,13 +99,29 @@ const Blog: NextPage<Props> = ({ posts, total }: Props) => {
           {!!posts.length &&
             posts.map((post) => (
               <Post key={post.title}>
-                <h2>
-                  <Link href={`/blog/post/${post.id}`}>
-                    <a>{post.title}</a>
-                  </Link>
-                </h2>
-                <span>Published: {getDisplayDatetime(post.published)}</span>
-                <p>{post.description}</p>
+                <ImgWrapper>
+                  {post.featuredImage.url ? (
+                    <Image
+                      src={`https:${post.featuredImage.url}`}
+                      alt={post.featuredImage.title}
+                      layout="fill"
+                      objectFit="cover"
+                      sizes="10vw"
+                    />
+                  ) : (
+                    "No image"
+                  )}
+                </ImgWrapper>
+
+                <Content>
+                  <h2>
+                    <Link href={`/blog/post/${post.id}`}>
+                      <a>{post.title}</a>
+                    </Link>
+                  </h2>
+                  <span>Published: {getDisplayDatetime(post.published)}</span>
+                  <p>{post.description}</p>
+                </Content>
               </Post>
             ))}
         </PostsWrapper>
