@@ -1,4 +1,4 @@
-import { CenterCol, PageWrapper } from "../..";
+import { CenterCol, PageWrapper } from "../.";
 import { useEffect, useState } from "react";
 
 import { BlogPost } from "../../../util/types";
