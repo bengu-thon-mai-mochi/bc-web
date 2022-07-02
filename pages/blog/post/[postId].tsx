@@ -1,4 +1,4 @@
-import { CenterCol, PageWrapper } from "../[blogPage]";
+import { CenterCol, PageWrapper } from "../../../styles/components";
 import type { GetServerSideProps, NextPage } from "next";
 import { getDisplayDatetime, getDomainInfo } from "../../../util";
 
@@ -7,9 +7,12 @@ import Image from "next/image";
 import SEO from "../../../components/seo";
 import styled from "styled-components";
 
+export const PubDate = styled.span`
+  font-style: italic;
+`;
+
 const ImgWrapper = styled.div`
   display: block;
-  /* position: relative; */
   width: 100%;
   height: 100%;
   max-height: 800px;
@@ -32,7 +35,7 @@ const BlogPostPage: NextPage<Props> = ({ post }: Props) => {
         <CenterCol>
           <h1>{post.title}</h1>
 
-          <span>Published: {getDisplayDatetime(post.published)}</span>
+          <PubDate>Published: {getDisplayDatetime(post.published)}</PubDate>
 
           {post.featuredImage.url && (
             <ImgWrapper>
@@ -43,7 +46,7 @@ const BlogPostPage: NextPage<Props> = ({ post }: Props) => {
                 width="100%"
                 height="100%"
                 objectFit="cover"
-                // sizes="10vw"
+                sizes="10vw"
               />
             </ImgWrapper>
           )}

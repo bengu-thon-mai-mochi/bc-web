@@ -7,6 +7,10 @@ const Wrapper = styled.div`
 `;
 
 const Nav = styled.nav`
+  display: flex;
+  gap: 2rem;
+  justify-content: flex-end;
+  padding: 0.5rem 1rem;
   background-color: gold;
 `;
 
@@ -20,6 +24,10 @@ const Layout = ({ children }: Props) => {
       <Nav>
         <Link href="/">
           <a>Home</a>
+        </Link>
+
+        <Link href="/blog/1">
+          <a>Blog</a>
         </Link>
       </Nav>
       {children}

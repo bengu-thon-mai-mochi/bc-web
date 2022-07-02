@@ -1,3 +1,4 @@
+import { CenterCol, PageWrapper } from "../../styles/components";
 import type { GetServerSideProps, NextPage } from "next";
 import { getDisplayDatetime, getDomainInfo } from "../../util";
 
@@ -6,34 +7,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { breakpoints } from "../../styles/constants";
 import styled from "styled-components";
-
-export const PageWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-bottom: 5rem;
-`;
-
-export const CenterCol = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  width: 100%;
-  margin: 0 0.5rem;
-
-  h1 {
-    font-size: 2.5rem;
-    font-weight: 200;
-    letter-spacing: 1px;
-  }
-
-  @media only screen and (min-width: ${breakpoints.sm}px) {
-    width: ${breakpoints.sm}px;
-
-    h1 {
-      font-size: 3.5rem;
-    }
-  }
-`;
 
 const PostsWrapper = styled.div`
   display: flex;
@@ -68,8 +41,8 @@ const Post = styled.div`
 
 const ImgWrapper = styled.div`
   position: relative;
-  width: 150px;
-  height: 150px;
+  width: 175px;
+  height: 175px;
   border-radius: 5px;
   background-color: gainsboro;
   display: flex;
