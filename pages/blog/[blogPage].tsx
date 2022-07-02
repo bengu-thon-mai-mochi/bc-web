@@ -1,6 +1,5 @@
 import type { GetServerSideProps, NextPage } from "next";
 import { getDisplayDatetime, getDomainInfo } from "../../util";
-import { useEffect, useState } from "react";
 
 import { BlogPost } from "../../util/types";
 import Image from "next/image";
@@ -18,36 +17,59 @@ export const CenterCol = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  width: 600px;
+  width: 100%;
+  margin: 0 0.5rem;
 
   h1 {
-    font-size: 3.5rem;
+    font-size: 2.5rem;
     font-weight: 200;
     letter-spacing: 1px;
+  }
+
+  @media only screen and (min-width: ${breakpoints.sm}px) {
+    width: ${breakpoints.sm}px;
+
+    h1 {
+      font-size: 3.5rem;
+    }
   }
 `;
 
 const PostsWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 3rem;
   font-weight: 300;
+  width: 100%;
+`;
+
+const PostWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  @media only screen and (min-width: ${breakpoints.sm}px) {
+    gap: 3rem;
+  }
 `;
 
 const Post = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
+  align-items: center;
+  gap: 0.7rem;
+  width: 100%;
 
   @media only screen and (min-width: ${breakpoints.sm}px) {
+    gap: 1rem;
     flex-direction: row;
   }
 `;
 
 const ImgWrapper = styled.div`
   position: relative;
-  min-width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
   border-radius: 5px;
   background-color: gainsboro;
   display: flex;
@@ -57,25 +79,49 @@ const ImgWrapper = styled.div`
   img {
     border-radius: 5px;
   }
+
+  @media only screen and (min-width: ${breakpoints.sm}px) {
+    min-width: 200px;
+    height: 200px;
+  }
 `;
 
 const Content = styled.div`
   display: flex;
+  height: 100%;
+  width: 100%;
   flex-direction: column;
-
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-  font-size: 1.2rem;
+  align-items: flex-start;
+  font-size: 1rem;
 
   h2 {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     font-weight: 400;
   }
+
+  @media only screen and (min-width: ${breakpoints.sm}px) {
+    font-size: 1.2rem;
+
+    h2 {
+      font-size: 1.3rem;
+    }
+  }
+`;
+
+const PubDate = styled.span`
+  margin-top: 0.3rem;
+  margin-bottom: 0.7rem;
+  font-style: italic;
+`;
+
+const Hr = styled.hr`
+  border-top: 1px solid lavender;
 `;
 
 const BlogPageLinks = styled.div`
   display: flex;
+  width: 100%;
+  flex-wrap: wrap;
   gap: 1rem;
   font-weight: 200;
 `;
@@ -98,31 +144,37 @@ const Blog: NextPage<Props> = ({ posts, total }: Props) => {
         <PostsWrapper>
           {!!posts.length &&
             posts.map((post) => (
-              <Post key={post.title}>
-                <ImgWrapper>
-                  {post.featuredImage.url ? (
-                    <Image
-                      src={`https:${post.featuredImage.url}`}
-                      alt={post.featuredImage.title}
-                      layout="fill"
-                      objectFit="cover"
-                      sizes="10vw"
-                    />
-                  ) : (
-                    "No image"
-                  )}
-                </ImgWrapper>
+              <PostWrapper key={post.title}>
+                <Post>
+                  <ImgWrapper>
+                    {post.featuredImage.url ? (
+                      <Image
+                        src={`https:${post.featuredImage.url}`}
+                        alt={post.featuredImage.title}
+                        layout="fill"
+                        objectFit="cover"
+                        sizes="10vw"
+                      />
+                    ) : (
+                      "No image"
+                    )}
+                  </ImgWrapper>
 
-                <Content>
-                  <h2>
-                    <Link href={`/blog/post/${post.id}`}>
-                      <a>{post.title}</a>
-                    </Link>
-                  </h2>
-                  <span>Published: {getDisplayDatetime(post.published)}</span>
-                  <p>{post.description}</p>
-                </Content>
-              </Post>
+                  <Content>
+                    <h2>
+                      <Link href={`/blog/post/${post.id}`}>
+                        <a>{post.title}</a>
+                      </Link>
+                    </h2>
+                    <PubDate>
+                      Published: {getDisplayDatetime(post.published)}
+                    </PubDate>
+                    <p>{post.description}</p>
+                  </Content>
+                </Post>
+
+                <Hr />
+              </PostWrapper>
             ))}
         </PostsWrapper>
 
