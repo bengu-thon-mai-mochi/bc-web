@@ -6,6 +6,7 @@ import { BlogPost } from "../../util/types";
 import Image from "next/image";
 import Link from "next/link";
 import { breakpoints } from "../../styles/constants";
+import { skipDefault } from "../../util/db";
 import styled from "styled-components";
 
 const PostsWrapper = styled.div`
@@ -101,16 +102,12 @@ const BlogPageLinks = styled.div`
   font-weight: 200;
 `;
 
-const skip = 10;
-
 interface Props {
   posts: BlogPost[];
-  total: number;
+  pages: number;
 }
 
-const Blog: NextPage<Props> = ({ posts, total }: Props) => {
-  const pages = Math.ceil(total / skip);
-
+const Blog: NextPage<Props> = ({ posts, pages }: Props) => {
   return (
     <PageWrapper>
       <CenterCol>
@@ -179,13 +176,16 @@ export const getServerSideProps: GetServerSideProps = async ({
   query,
 }) => {
   const [host, protocol] = getDomainInfo(req.headers.host);
-  const blogPage = query.blogPage ? parseInt(query.blogPage as string, 10) : 1;
+  const blogPage =
+    query.blogPage === undefined || query.blogPage === "1"
+      ? 0
+      : parseInt(query.blogPage as string, 10) - 1;
 
-  const { entries, total } = await (
+  const { entries, pages } = await (
     await fetch(
-      `${protocol}://${host}/api/get-all-posts?skip=${blogPage * skip}`
+      `${protocol}://${host}/api/get-all-posts?skip=${blogPage * skipDefault}`
     )
   ).json();
 
-  return { props: { posts: entries, total } };
+  return { props: { posts: entries, pages } };
 };

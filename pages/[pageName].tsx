@@ -1,11 +1,12 @@
 import { CenterCol, ImgWrapper, PageWrapper } from "../styles/components";
 import { GetServerSideProps, NextPage } from "next";
-import { getDisplayDatetime, getDomainInfo, pageMapping } from "../util";
+import { getDisplayDatetime, getDomainInfo } from "../util";
 
 import Image from "next/image";
 import { Page } from "../util/types";
 import { PubDate } from "./blog/post/[postId]";
-import styled from "styled-components";
+import SEO from "../components/seo";
+import { pageMapping } from "../util/db";
 
 interface Props {
   page: Page;
@@ -16,11 +17,10 @@ const SitePage: NextPage<Props> = ({ page }: Props) => {
     return null;
   }
 
-  console.log(page.updated);
-
   return (
     <>
-      {/* <SEO pageTitle={post.title} description={post.description} /> */}
+      <SEO pageTitle={page.title} description={page.description} />
+
       <PageWrapper>
         <CenterCol>
           <h1>{page.title}</h1>
