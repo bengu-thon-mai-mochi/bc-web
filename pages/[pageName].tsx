@@ -32,10 +32,10 @@ const SitePage: NextPage<Props> = ({ page }: Props) => {
               <Image
                 src={`https:${page.featuredImage.url}`}
                 alt={page.featuredImage.title}
-                layout="responsive"
-                width="100%"
-                height="100%"
-                objectFit="cover"
+                fill={true}
+                style={{
+                  objectFit: "contain"
+                }}
                 sizes="70vw"
               />
             </ImgWrapper>
