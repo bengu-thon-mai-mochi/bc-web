@@ -5,7 +5,6 @@ export const PageWrapper = styled.div`
   display: flex;
   justify-content: center;
   height: 100vh;
-  margin-bottom: 5rem;
 `;
 
 export const CenterCol = styled.div`
@@ -55,7 +54,11 @@ export const ImgWrapper = styled.div`
 export const LandingPage = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  flex: 1;
-  width: 100%;
+  justify-content: space-evenly;
+
+  @media only screen and (min-width: ${breakpoints.sm}px) {
+    gap: 1.5rem;
+    flex: 1;
+    width: 100%;
+  }
 `;

@@ -4,7 +4,7 @@ import type { NextPage } from "next";
 import { breakpoints } from "../styles/constants";
 import styled from "styled-components";
 
-const Section1 = styled.section`
+const Header = styled.section`
   display: flex;
   flex-direction: column;
   padding: 25px 25px;
@@ -139,10 +139,10 @@ const Home: NextPage = () => {
   return (
     <PageWrapper>
       <LandingPage>
-        <Section1>
+        <Header>
           <h1>Biodiversity Connections</h1>
           <p>Conservation and science meetups since 201X.</p>
-        </Section1>
+        </Header>
         <Main>
         <Section>
           <h2>Mailing list</h2>
