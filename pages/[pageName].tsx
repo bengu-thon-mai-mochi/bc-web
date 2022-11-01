@@ -27,7 +27,7 @@ const SitePage: NextPage<Props> = ({ page }: Props) => {
 
           <PubDate>Published: {getDisplayDatetime(page.updated)}</PubDate>
 
-          {page.featuredImage.url && (
+          {page.featuredImage?.url && (
             <ImgWrapper>
               <Image
                 src={`https:${page.featuredImage.url}`}
@@ -55,7 +55,9 @@ export const getServerSideProps: GetServerSideProps = async ({
   query,
 }) => {
   const pageName = query.pageName;
-  if (!pageName) {
+
+  // For some reason, landing page produces a .js pageName.
+  if (!pageName || pageName.includes('.js')) {
     return { props: { page: {} } };
   }
 

@@ -44,8 +44,7 @@ export const CenterCol = styled.div`
 `;
 
 export const ImgWrapper = styled.div`
-  display: block;
+  position: relative;
   width: 100%;
-  height: 100%;
-  max-height: 800px;
+  min-height: 100%;
 `;

@@ -123,8 +123,10 @@ const Blog: NextPage<Props> = ({ posts, pages }: Props) => {
                       <Image
                         src={`https:${post.featuredImage.url}`}
                         alt={post.featuredImage.title}
-                        layout="fill"
-                        objectFit="cover"
+                        fill={true}
+                        style={{
+                          objectFit: "contain"
+                        }}
                         sizes="10vw"
                       />
                     ) : (
@@ -135,7 +137,7 @@ const Blog: NextPage<Props> = ({ posts, pages }: Props) => {
                   <Content>
                     <h2>
                       <Link href={`/blog/post/${post.id}`}>
-                        <a>{post.title}</a>
+                        {post.title}
                       </Link>
                     </h2>
                     <PubDate>
@@ -159,7 +161,7 @@ const Blog: NextPage<Props> = ({ posts, pages }: Props) => {
 
                 return (
                   <Link href={`/blog/${page}`} key={idx}>
-                    <a>{page}</a>
+                    {page}
                   </Link>
                 );
               })}

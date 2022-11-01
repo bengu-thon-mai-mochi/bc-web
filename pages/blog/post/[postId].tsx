@@ -34,10 +34,10 @@ const BlogPostPage: NextPage<Props> = ({ post }: Props) => {
               <Image
                 src={`https:${post.featuredImage.url}`}
                 alt={post.featuredImage.title}
-                layout="responsive"
-                width="100%"
-                height="100%"
-                objectFit="cover"
+                fill={true}
+                style={{
+                  objectFit: "contain"
+                }}
                 sizes="70vw"
               />
             </ImgWrapper>
