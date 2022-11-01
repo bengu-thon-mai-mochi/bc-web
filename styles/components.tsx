@@ -4,6 +4,7 @@ import styled from "styled-components";
 export const PageWrapper = styled.div`
   display: flex;
   justify-content: center;
+  height: 100vh;
   margin-bottom: 5rem;
 `;
 
@@ -11,12 +12,13 @@ export const CenterCol = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  flex: 1;
   width: 100%;
   margin: 0 0.5rem;
 
   h1 {
     font-size: 2.5rem;
-    font-weight: 200;
+    font-weight: 400;
     letter-spacing: 1px;
   }
 
@@ -47,4 +49,13 @@ export const ImgWrapper = styled.div`
   position: relative;
   width: 100%;
   min-height: 100%;
+`;
+
+
+export const LandingPage = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  flex: 1;
+  width: 100%;
 `;
