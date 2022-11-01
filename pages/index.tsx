@@ -37,11 +37,11 @@ const Section1 = styled.section`
 const Section = styled.section`
   display: flex;
   flex-direction: column;
-  height: 350px;
-  width: 50%;
+  height: 220px;
   justify-content: center;
   aling-items: flex-start;
-  padding: 25px;
+  padding-right: 25px;
+  padding-left: 25px;
   border: 1px solid #73AD21;
   border-radius: 25px;
   margin: 0 15px;
@@ -69,6 +69,21 @@ const Section = styled.section`
     font-family: 'Fauna One', serif;
     text-decoration: underline;
   }
+
+  @media only screen and (min-width: ${breakpoints.sm}px) {
+    display: flex;
+    flex-direction: column;
+    height: 350px;
+    width: 50%;
+    justify-content: center;
+    aling-items: flex-start;
+    padding: 25px;
+    border: 1px solid #73AD21;
+    border-radius: 25px;
+    margin: 0 15px;
+    font-family: "Outfit", sans-serif;
+    border-style: dashed;
+  }
 `;
 
 const SocialMediaWrapper = styled.div`
@@ -84,12 +99,36 @@ const SocialMediaWrapper = styled.div`
 
 const Main = styled.div`
   display: flex;
+  flex-direction: column;
   gap: 1rem;
-  align-items: center;
-  justify-content: center;
   
   @media only screen and (min-width: ${breakpoints.sm}px) {
     display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+  }
+`;
+
+const Footer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-bottom: 1rem;
+
+
+  h2 {
+    font-family: 'Fauna One', serif;
+    font-size: 1.90rem;
+    font-weight: 200;
+    text-align: center;
+    letter-spacing: 1px;
+  }
+  
+  @media only screen and (min-width: ${breakpoints.sm}px) {
+    display: flex;
+    flex-direction: row;
     gap: 1rem;
     align-items: center;
     justify-content: center;
@@ -138,7 +177,7 @@ const Home: NextPage = () => {
           </p>
         </Section>
         </Main>
-        <Section>
+        <Footer>
           <h2>Follow us</h2>
 
           <SocialMediaWrapper>
@@ -169,7 +208,7 @@ const Home: NextPage = () => {
               <FbIcon height="31px" width="31px" />
             </a>
           </SocialMediaWrapper>
-        </Section>
+        </Footer>
       </LandingPage>
     </PageWrapper>
   );
