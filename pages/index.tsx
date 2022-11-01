@@ -7,8 +7,7 @@ import styled from "styled-components";
 const Header = styled.section`
   display: flex;
   flex-direction: column;
-  padding: 25px 25px;
-  padding: 20px;
+  padding: 25px;
   margin: 15px 15px 0 15px;
   align-items: space-evenly;
 
@@ -39,7 +38,6 @@ const Section = styled.section`
   flex-direction: column;
   height: 220px;
   justify-content: center;
-  aling-items: flex-start;
   padding-right: 25px;
   padding-left: 25px;
   border: 1px solid #73AD21;
@@ -57,26 +55,21 @@ const Section = styled.section`
   }
   
   a {
-    display: inline flex;
     font-size: 1.0rem;
     text-decoration: underline;
   }
 
   a:hover {
     background-color: #9dd350;
-    display: inline flex;
     font-size: 0.95rem;
     font-family: 'Fauna One', serif;
     text-decoration: underline;
   }
 
   @media only screen and (min-width: ${breakpoints.sm}px) {
-    display: flex;
-    flex-direction: column;
     height: 350px;
     width: 50%;
     justify-content: center;
-    aling-items: flex-start;
     padding: 25px;
     border: 1px solid #73AD21;
     border-radius: 25px;
@@ -103,7 +96,6 @@ const Main = styled.div`
   gap: 1rem;
   
   @media only screen and (min-width: ${breakpoints.sm}px) {
-    display: flex;
     flex-direction: row;
     gap: 1rem;
     align-items: center;
@@ -127,7 +119,6 @@ const Footer = styled.div`
   }
   
   @media only screen and (min-width: ${breakpoints.sm}px) {
-    display: flex;
     flex-direction: row;
     gap: 1rem;
     align-items: center;
