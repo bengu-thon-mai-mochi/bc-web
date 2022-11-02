@@ -103,7 +103,7 @@ const Main = styled.div`
   }
 `;
 
-const Footer = styled.div`
+const Footer = styled.footer`
   display: flex;
   flex-direction: column;
   gap: 1rem;
