@@ -4,7 +4,6 @@ import styled from "styled-components";
 export const PageWrapper = styled.div`
   display: flex;
   justify-content: center;
-  height: 100vh;
 `;
 
 export const CenterCol = styled.div`
@@ -54,7 +53,8 @@ export const ImgWrapper = styled.div`
 export const LandingPage = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-between;
+  min-height: 90vh;
 
   @media only screen and (min-width: ${breakpoints.sm}px) {
     gap: 1.5rem;

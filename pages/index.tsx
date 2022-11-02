@@ -107,8 +107,7 @@ const Footer = styled.footer`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  padding-bottom: 1rem;
-
+  padding: 1rem;
 
   h2 {
     font-family: 'Fauna One', serif;
