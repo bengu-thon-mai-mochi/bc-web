@@ -14,7 +14,7 @@ const PostsWrapper = styled.div`
   flex-direction: column;
   gap: 3rem;
   font-weight: 300;
-  width: 100%;
+  width: 70%;
 `;
 
 const PostWrapper = styled.div`
@@ -111,9 +111,8 @@ const Blog: NextPage<Props> = ({ posts, pages }: Props) => {
   return (
     <PageWrapper>
       <CenterCol>
-        <h1>Blog</h1>
-
         <PostsWrapper>
+          <h1>Blog</h1>
           {!!posts.length &&
             posts.map((post) => (
               <PostWrapper key={post.title}>
@@ -150,22 +149,22 @@ const Blog: NextPage<Props> = ({ posts, pages }: Props) => {
                 <Hr />
               </PostWrapper>
             ))}
+
+          <BlogPageLinks>
+            {pages &&
+              Array(pages)
+                .fill(undefined)
+                .map((_, idx) => {
+                  const page = idx + 1;
+
+                  return (
+                    <Link href={`/blog/${page}`} key={idx}>
+                      {page}
+                    </Link>
+                  );
+                })}
+          </BlogPageLinks>
         </PostsWrapper>
-
-        <BlogPageLinks>
-          {pages &&
-            Array(pages)
-              .fill(undefined)
-              .map((_, idx) => {
-                const page = idx + 1;
-
-                return (
-                  <Link href={`/blog/${page}`} key={idx}>
-                    {page}
-                  </Link>
-                );
-              })}
-        </BlogPageLinks>
       </CenterCol>
     </PageWrapper>
   );
