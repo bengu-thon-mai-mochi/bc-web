@@ -1,16 +1,56 @@
 import { CenterCol, ImgWrapper, PageWrapper } from "../styles/components";
 import { GetServerSideProps, NextPage } from "next";
 import { getDisplayDatetime, getDomainInfo } from "../util";
-
+import { breakpoints } from "../styles/constants";
 import Image from "next/image";
 import { Page } from "../util/types";
 import { PubDate } from "./blog/post/[postId]";
 import SEO from "../components/seo";
 import { pageMapping } from "../util/db";
+import styled from "styled-components";
 
 interface Props {
   page: Page;
 }
+
+const RightPane = styled.section`
+
+  @media only screen and (min-width: ${breakpoints.sm}px) {
+    display: flex;
+    flex-direction: column;
+    align-items: space-evenly;
+    width: 70%
+  }
+`;
+
+const LeftPane = styled.section`
+  @media only screen and (min-width: ${breakpoints.sm}px) {
+    display: flex;
+    flex-direction: column;
+    align-items: space-evenly;
+    width: 30%;
+  }
+`;
+
+const Header = styled.section`
+
+  @media only screen and (min-width: ${breakpoints.sm}px) {
+    display: flex;
+    flex-direction: column;
+    align-items: space-evenly;
+    position: fixed;
+
+    h1 {
+      display: inline-block;
+      width: 50%;
+      font-size: 2.5rem;
+      line-height: 1.75rem;
+      font-weight: 250;
+      letter-spacing: 3px;
+      font-family: "Outfit", sans-serif;
+    }
+  }
+`;
 
 const SitePage: NextPage<Props> = ({ page }: Props) => {
   if (!page) {
@@ -20,28 +60,31 @@ const SitePage: NextPage<Props> = ({ page }: Props) => {
   return (
     <>
       <SEO pageTitle={page.title} description={page.description} />
-
       <PageWrapper>
         <CenterCol>
-          <h1>{page.title}</h1>
-
-          <PubDate>Published: {getDisplayDatetime(page.updated)}</PubDate>
+        <LeftPane>
+          <Header>
+              <h1>{page.title}</h1>
+              <PubDate>Published: {getDisplayDatetime(page.updated)}</PubDate>
+          </Header>
 
           {page.featuredImage?.url && (
-            <ImgWrapper>
-              <Image
-                src={`https:${page.featuredImage.url}`}
-                alt={page.featuredImage.title}
-                fill={true}
-                style={{
-                  objectFit: "contain"
-                }}
-                sizes="70vw"
-              />
-            </ImgWrapper>
-          )}
-
+              <ImgWrapper>
+                <Image
+                  src={`https:${page.featuredImage.url}`}
+                  alt={page.featuredImage.title}
+                  fill={true}
+                  style={{
+                    objectFit: "contain"
+                  }}
+                  sizes="70vw"
+                />
+              </ImgWrapper>
+            )}
+        </LeftPane>
+        <RightPane>
           <div dangerouslySetInnerHTML={{ __html: page.content! }} />
+        </RightPane>
         </CenterCol>
       </PageWrapper>
     </>
