@@ -9,6 +9,8 @@ import styled from "styled-components";
 
 export const PubDate = styled.span`
   font-style: italic;
+  font-size: 1rem;
+  line-height: 1rem;
 `;
 
 interface Props {

@@ -3,20 +3,21 @@ import styled from "styled-components";
 
 export const PageWrapper = styled.div`
   display: flex;
-  justify-content: center;
 `;
 
 export const CenterCol = styled.div`
   display: flex;
+  flex: 1;
   flex-direction: column;
   gap: 1.5rem;
-  width: 100%;
-  margin: 0 0.5rem;
+  margin: 3rem;
 
   h1 {
     font-size: 2.5rem;
-    font-weight: 400;
+    font-weight: 200;
     letter-spacing: 1px;
+    line-height: 1.75rem;
+    font-family: "Outfit", sans-serif;
   }
 
   h2 {
@@ -35,10 +36,11 @@ export const CenterCol = styled.div`
 
   @media only screen and (min-width: ${breakpoints.sm}px) {
     width: ${breakpoints.sm}px;
-
-    h1 {
-      font-size: 3.5rem;
-    }
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    gap: 1.5rem;
+    margin: 3rem;
   }
 `;
 
