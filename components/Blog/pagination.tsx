@@ -40,6 +40,7 @@ const Pagination = ({ pages }: Props) => {
   const router = useRouter();
   const { blogPage } = router.query;
   const currentPage = Number(blogPage);
+  const paginationElements = [];
 
   return (
       <BlogPageLinks>
@@ -55,7 +56,7 @@ const Pagination = ({ pages }: Props) => {
                 .map((_, idx) => {
                   const page = idx + 1;
 
-                  return (
+                  paginationElements.push(
                     <Link 
                       href={`/blog/${page}`} 
                       key={idx} 
@@ -64,7 +65,10 @@ const Pagination = ({ pages }: Props) => {
                       {page}
                     </Link>
                   );
-                })}
+                })
+               
+              } 
+              { paginationElements.splice(currentPage - 3 , currentPage + 2) }
         <Link 
           href={`/blog/${currentPage + 1}`} 
           className={currentPage === pages ? "disabled": ""}
