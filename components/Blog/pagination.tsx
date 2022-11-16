@@ -26,6 +26,10 @@ const BlogPageLinks = styled.div`
   a:hover {
     color: brown;
   }
+
+  .disabled {
+    display: none;
+  }
 `;
 
 interface Props {
@@ -35,26 +39,39 @@ interface Props {
 const Pagination = ({ pages }: Props) => {
   const router = useRouter();
   const { blogPage } = router.query;
+  const currentPage = Number(blogPage);
 
   return (
-    <BlogPageLinks>
-          {pages &&
-            Array(pages)
-              .fill(undefined) 
-              .map((_, idx) => {
-                const page = idx + 1;
+      <BlogPageLinks>
+        <Link 
+          href={`/blog/${currentPage - 1}`} 
+          className={currentPage === 1 ? "disabled": ""}
+        >
+          Previous
+        </Link>
+            {pages &&
+              Array(pages)
+                .fill(undefined) 
+                .map((_, idx) => {
+                  const page = idx + 1;
 
-                return (
-                  <Link 
-                    href={`/blog/${page}`} 
-                    key={idx} 
-                    className={Number(blogPage) === page ? "active" : ""}
-                  >
-                    {page}
-                  </Link>
-                );
-              })}
-    </BlogPageLinks>
+                  return (
+                    <Link 
+                      href={`/blog/${page}`} 
+                      key={idx} 
+                      className={currentPage === page ? "active" : ""}
+                    >
+                      {page}
+                    </Link>
+                  );
+                })}
+        <Link 
+          href={`/blog/${currentPage + 1}`} 
+          className={currentPage === pages ? "disabled": ""}
+        >
+          Next
+        </Link>
+      </BlogPageLinks>
   );
 };
 
