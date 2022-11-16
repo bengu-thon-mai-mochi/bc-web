@@ -14,7 +14,7 @@ export const CenterCol = styled.div`
 
   h1 {
     font-size: 2.5rem;
-    font-weight: 250;
+    font-weight: 200;
     letter-spacing: 1px;
     line-height: 1.75rem;
     font-family: "Outfit", sans-serif;
