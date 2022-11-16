@@ -1,13 +1,12 @@
 import { CenterCol, PageWrapper } from "../../styles/components";
 import type { GetServerSideProps, NextPage } from "next";
-import { getDisplayDatetime, getDomainInfo } from "../../util";
-
+import { getDomainInfo } from "../../util";
 import { BlogPost } from "../../util/types";
-import Image from "next/image";
-import Link from "next/link";
 import { breakpoints } from "../../styles/constants";
 import { skipDefault } from "../../util/db";
 import styled from "styled-components";
+import Pagination  from "../../components/Blog/pagination";
+import Card from "../../components/Blog/card";
 
 const PostsWrapper = styled.div`
   display: flex;
@@ -27,79 +26,10 @@ const PostWrapper = styled.div`
   }
 `;
 
-const Post = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.7rem;
-  width: 100%;
 
-  @media only screen and (min-width: ${breakpoints.sm}px) {
-    gap: 1rem;
-    flex-direction: row;
-  }
-`;
-
-const ImgWrapper = styled.div`
-  position: relative;
-  width: 175px;
-  height: 175px;
-  border-radius: 5px;
-  border: 1px solid gainsboro;
-  background-color: aliceblue;
-  color: silver;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  img {
-    border-radius: 5px;
-  }
-
-  @media only screen and (min-width: ${breakpoints.sm}px) {
-    min-width: 200px;
-    height: 200px;
-  }
-`;
-
-const Content = styled.div`
-  display: flex;
-  height: 100%;
-  width: 100%;
-  flex-direction: column;
-  align-items: flex-start;
-  font-size: 1rem;
-
-  h2 {
-    font-size: 1.1rem;
-    font-weight: 400;
-  }
-
-  @media only screen and (min-width: ${breakpoints.sm}px) {
-    font-size: 1.2rem;
-
-    h2 {
-      font-size: 1.3rem;
-    }
-  }
-`;
-
-const PubDate = styled.span`
-  margin-top: 0.3rem;
-  margin-bottom: 0.7rem;
-  font-style: italic;
-`;
 
 const Hr = styled.hr`
   border-top: 1px solid lavender;
-`;
-
-const BlogPageLinks = styled.div`
-  display: flex;
-  width: 100%;
-  flex-wrap: wrap;
-  gap: 1rem;
-  font-weight: 200;
 `;
 
 interface Props {
@@ -117,55 +47,14 @@ const Blog: NextPage<Props> = ({ posts, pages }: Props) => {
           {!!posts.length &&
             posts.map((post) => (
               <PostWrapper key={post.title}>
-                <Post>
-                  <ImgWrapper>
-                    {post.featuredImage.url ? (
-                      <Image
-                        src={`https:${post.featuredImage.url}`}
-                        alt={post.featuredImage.title}
-                        fill={true}
-                        style={{
-                          objectFit: "contain"
-                        }}
-                        sizes="10vw"
-                      />
-                    ) : (
-                      "No image"
-                    )}
-                  </ImgWrapper>
-
-                  <Content>
-                    <h2>
-                      <Link href={`/blog/post/${post.id}`}>
-                        {post.title}
-                      </Link>
-                    </h2>
-                    <PubDate>
-                      Published: {getDisplayDatetime(post.published)}
-                    </PubDate>
-                    <p>{post.description}</p>
-                  </Content>
-                </Post>
+                <Card imgData={post.featuredImage} post={post}></Card>
 
                 <Hr />
               </PostWrapper>
             ))}
         </PostsWrapper>
 
-        <BlogPageLinks>
-          {pages &&
-            Array(pages)
-              .fill(undefined)
-              .map((_, idx) => {
-                const page = idx + 1;
-
-                return (
-                  <Link href={`/blog/${page}`} key={idx}>
-                    {page}
-                  </Link>
-                );
-              })}
-        </BlogPageLinks>
+        <Pagination pages={pages}></Pagination>
       </CenterCol>
     </PageWrapper>
   );
