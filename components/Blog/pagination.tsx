@@ -12,6 +12,7 @@ const BlogPageLinks = styled.div`
   gap: 1rem;
   font-weight: 400;
   font-family: "Outfit", sans-serif;
+  margin-bottom: 40px;
   
   a {
     color: black;
