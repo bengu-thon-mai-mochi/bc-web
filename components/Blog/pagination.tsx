@@ -1,6 +1,6 @@
 import Link from "next/link";
 import styled from "styled-components";
-
+import { useRouter } from "next/router";
 const BlogPageLinks = styled.div`
   display: flex;
   flex-direction: row;
@@ -24,6 +24,9 @@ interface Props {
 }
 
 const Pagination = ({ pages }: Props) => {
+  const router = useRouter();
+  const { blogPage } = router.query;
+
   return (
     <BlogPageLinks>
           {pages &&
@@ -36,6 +39,7 @@ const Pagination = ({ pages }: Props) => {
                   <Link 
                     href={`/blog/${page}`} 
                     key={idx} 
+                    className={Number(blogPage) === page ? "active" : ""}
                   >
                     {page}
                   </Link>
