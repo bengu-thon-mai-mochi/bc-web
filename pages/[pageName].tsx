@@ -33,22 +33,21 @@ const LeftPane = styled.section`
 `;
 
 const Header = styled.section`
-
-  @media only screen and (min-width: ${breakpoints.sm}px) {
-    display: flex;
+display: flex;
     flex-direction: column;
     align-items: space-evenly;
-    position: fixed;
+h1 {
+  display: inline-block;
+  width: 50%;
+  font-size: 2.5rem;
+  line-height: 1.75rem;
+  font-weight: 250;
+  letter-spacing: 3px;
+  font-family: "Outfit", sans-serif;
+}
 
-    h1 {
-      display: inline-block;
-      width: 50%;
-      font-size: 2.5rem;
-      line-height: 1.75rem;
-      font-weight: 250;
-      letter-spacing: 3px;
-      font-family: "Outfit", sans-serif;
-    }
+  @media only screen and (min-width: ${breakpoints.sm}px) {
+    position: fixed;
   }
 `;
 
@@ -65,7 +64,11 @@ const SitePage: NextPage<Props> = ({ page }: Props) => {
         <LeftPane>
           <Header>
               <h1>{page.title}</h1>
-              <PubDate>Published: {getDisplayDatetime(page.updated)}</PubDate>
+              <PubDate>
+                Published: 
+                <br></br> 
+                {getDisplayDatetime(page.updated)}
+              </PubDate>
           </Header>
 
           {page.featuredImage?.url && (
