@@ -5,6 +5,8 @@ import { useRouter } from "next/router";
 const BlogPageLinks = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   flex-wrap: wrap;
   gap: 1rem;
@@ -40,7 +42,7 @@ const Pagination = ({ pages }: Props) => {
   const router = useRouter();
   const { blogPage } = router.query;
   const currentPage = Number(blogPage);
-  const paginationElements = [];
+  const pagination =  Array(pages).fill(undefined) 
 
   return (
       <BlogPageLinks>
@@ -51,24 +53,31 @@ const Pagination = ({ pages }: Props) => {
           Previous
         </Link>
             {pages &&
-              Array(pages)
-                .fill(undefined) 
+              pagination
                 .map((_, idx) => {
                   const page = idx + 1;
 
-                  paginationElements.push(
+                  if(idx < 3 || idx >= pages - 3 || idx >= currentPage - 2 && idx <= currentPage + 1){
+                    return (
                     <Link 
                       href={`/blog/${page}`} 
                       key={idx} 
                       className={currentPage === page ? "active" : ""}
                     >
                       {page}
-                    </Link>
-                  );
+                    </Link>)
+                  } else if (idx === currentPage + 3 ) {
+                    return ( <div key="dot1"> ... </div>)
+                  } else if (idx === currentPage - 4) {
+                    return ( <div key="dot2"> ... </div>)
+                  } else {
+                    return (
+                      []
+                    )
+                  };
                 })
-               
-              } 
-              { paginationElements.splice(currentPage - 3 , currentPage + 2) }
+                  
+              }
         <Link 
           href={`/blog/${currentPage + 1}`} 
           className={currentPage === pages ? "disabled": ""}
