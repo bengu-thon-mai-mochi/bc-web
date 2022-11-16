@@ -8,7 +8,7 @@ const ImgWrapper = styled.div`
   height: 175px;
   border-radius: 5px;
   border: 1px solid gainsboro;
-  background-color: aliceblue;
+  background-color: brown;
   color: silver;
   display: flex;
   justify-content: center;

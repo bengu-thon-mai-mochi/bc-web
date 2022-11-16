@@ -26,10 +26,10 @@ export const CenterCol = styled.div`
   }
 
   a {
-    color: dodgerblue;
+    color: black;
 
     :hover {
-      color: deeppink;
+      color: brown;
     }
   }
 
