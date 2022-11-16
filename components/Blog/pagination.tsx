@@ -44,6 +44,7 @@ const Pagination = ({ pages }: Props) => {
   const { blogPage } = router.query;
   const currentPage = Number(blogPage);
   const pagination =  Array(pages).fill(undefined) 
+  const paginationElements = [];
 
   return (
       <BlogPageLinks>
@@ -58,26 +59,22 @@ const Pagination = ({ pages }: Props) => {
                 .map((_, idx) => {
                   const page = idx + 1;
 
-                  if(idx < 3 || idx >= pages - 3 || idx >= currentPage - 2 && idx <= currentPage + 1){
-                    return (
+                  paginationElements.push(
                     <Link 
                       href={`/blog/${page}`} 
                       key={idx} 
                       className={currentPage === page ? "active" : ""}
                     >
                       {page}
-                    </Link>)
-                  } else if (idx === currentPage + 3 ) {
-                    return ( <div key="dot1"> ... </div>)
-                  } else if (idx === currentPage - 4) {
-                    return ( <div key="dot2"> ... </div>)
-                  } else {
-                    return (
-                      []
-                    )
-                  };
+                    </Link>
+                  );
                 })
-                  
+               
+              } 
+              { 
+                currentPage < 3 
+                ? paginationElements.slice(0 , 5) 
+                : paginationElements.slice(currentPage - 3 , currentPage + 2)
               }
         <Link 
           href={`/blog/${currentPage + 1}`} 
