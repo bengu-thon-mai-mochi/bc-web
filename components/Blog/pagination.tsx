@@ -44,7 +44,6 @@ const Pagination = ({ pages }: Props) => {
   const { blogPage } = router.query;
   const currentPage = Number(blogPage);
   const pagination =  Array(pages).fill(undefined) 
-  const paginationElements = [];
 
   return (
       <BlogPageLinks>
