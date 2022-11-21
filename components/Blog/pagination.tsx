@@ -56,26 +56,27 @@ const Pagination = ({ pages }: Props) => {
         </Link>
             {pages &&
               pagination
-                .map((_, idx) => {
-                  const page = idx + 1;
+              .map((_, idx) => {
+                const page = idx + 1;
 
-                  paginationElements.push(
-                    <Link 
-                      href={`/blog/${page}`} 
-                      key={idx} 
-                      className={currentPage === page ? "active" : ""}
-                    >
-                      {page}
-                    </Link>
-                  );
-                })
-               
-              } 
-              { 
-                currentPage < 3 
-                ? paginationElements.slice(0 , 5) 
-                : paginationElements.slice(currentPage - 3 , currentPage + 2)
-              }
+                return (
+                  <Link 
+                    href={`/blog/${page}`} 
+                    key={idx} 
+                    className={
+                      (currentPage - 4 < idx && currentPage + 2 > idx)
+                      ? 
+                        currentPage === page 
+                        ? "active" 
+                        : "" 
+                      : "disabled"
+                    }
+                  >
+                    {page}
+                  </Link>
+                )
+              
+              })}
         <Link 
           href={`/blog/${currentPage + 1}`} 
           className={currentPage === pages ? "disabled": ""}
