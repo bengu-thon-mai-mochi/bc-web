@@ -43,7 +43,8 @@ const Blog: NextPage<Props> = ({ posts, pages }: Props) => {
                 <Card imgData={post.featuredImage} post={post}></Card>
               </PostWrapper>
             ))}
-          </PostsWrapper>
+        </PostsWrapper>
+
         <Pagination pages={pages}></Pagination>
       </CenterCol>
     </PageWrapper>
