@@ -1,6 +1,7 @@
 import Link from "next/link";
 import styled from "styled-components";
 import { useRouter } from "next/router";
+
 const BlogPageLinks = styled.div`
   display: flex;
   flex-direction: row;
@@ -9,12 +10,20 @@ const BlogPageLinks = styled.div`
   gap: 1rem;
   font-weight: 400;
   font-family: "Outfit", sans-serif;
+  
+  a {
+    color: black;
+  }
 
   a.active {
     font-family: 'Fauna One', serif;
     font-weight: 600;
     font-size: 1.25rem;
     text-decoration: underline;
+    color: brown;
+  }
+  
+  a:hover {
     color: brown;
   }
 `;

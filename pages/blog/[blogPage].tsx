@@ -26,10 +26,6 @@ const PostWrapper = styled.div`
   }
 `;
 
-const Hr = styled.hr`
-  border-top: 1px solid lavender;
-`;
-
 interface Props {
   posts: BlogPost[];
   pages: number;
@@ -45,8 +41,6 @@ const Blog: NextPage<Props> = ({ posts, pages }: Props) => {
             posts.map((post) => (
               <PostWrapper key={post.title}>
                 <Card imgData={post.featuredImage} post={post}></Card>
-
-                <Hr />
               </PostWrapper>
             ))}
           </PostsWrapper>
