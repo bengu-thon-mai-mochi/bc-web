@@ -13,7 +13,6 @@ const PostsWrapper = styled.div`
   flex-direction: column;
   gap: 3rem;
   font-weight: 300;
-  width: 70%;
 `;
 
 const PostWrapper = styled.div`
@@ -43,9 +42,9 @@ const Blog: NextPage<Props> = ({ posts, pages }: Props) => {
                 <Card imgData={post.featuredImage} post={post}></Card>
               </PostWrapper>
             ))}
-        </PostsWrapper>
 
         <Pagination pages={pages}></Pagination>
+        </PostsWrapper>
       </CenterCol>
     </PageWrapper>
   );
