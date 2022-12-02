@@ -134,38 +134,38 @@ const Home: NextPage = () => {
           <p>Conservation and science meetups since 201X.</p>
         </Header>
         <Main>
-        <Section>
-          <h2>Mailing list</h2>
-          <p>
-            Subscribe to our{" "}
-            <a
-              href="https://biodiversityconnections.org/sign-up-form/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              mailing list
-            </a>{" "}
-            to meet the most awesome people in the world! You&apos;ll meet
-            conservationists, biologists, other researchers and scientists, and
-            learn loads of cool stuff.
-          </p>
-        </Section>
+          <Section>
+            <h2>Mailing list</h2>
+            <p>
+              Subscribe to our{" "}
+              <a
+                href="https://us3.list-manage.com/subscribe?u=4779fe4ee28c66b50504b91bc&id=6da8a528f9"
+                target="_blank"
+                rel="noreferrer"
+              >
+                mailing list
+              </a>{" "}
+              to meet the most awesome people in the world! You&apos;ll meet
+              conservationists, biologists, other researchers and scientists, and
+              learn loads of cool stuff.
+            </p>
+          </Section>
 
-        <Section>
-          <h2>Contact</h2>
-          <p>
-            Got questions? Want to know more about where you can help out? Mail
-            us any time at{" "}
-            <a
-              href="mailto:https://biodiversityconnections.org/sign-up-form/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              biodiversityconnections@gmail.com
-            </a>{" "}
-            for details on how to donate.
-          </p>
-        </Section>
+          <Section>
+            <h2>Contact</h2>
+            <p>
+              Got questions? Want to know more about where you can help out? Mail
+              us any time at{" "}
+              <a
+                href="mailto:https://biodiversityconnections.org/sign-up-form/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                biodiversityconnections@gmail.com
+              </a>{" "}
+              for details on how to donate.
+            </p>
+          </Section>
         </Main>
         <Footer>
           <h2>Follow us</h2>
